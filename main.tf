@@ -1,4 +1,5 @@
 
+//Rendering vars for ansible
 data  "template_file" "ansible-tpl" {
   template = file("../ansible/templates/vars.tpl")
   vars = {
@@ -11,21 +12,5 @@ data  "template_file" "ansible-tpl" {
 
 resource "local_file" "ansible-file-yml" {
   content  = data.template_file.ansible-tpl.rendered
-  filename = "../ansible/files/vars.yml"
-}
-
-
-
-data  "template_file" "rds-codeigniter-database-tpl" {
-  template = file("../ansible/templates/codeigniter-database.php")
-  vars = {
-    db-endpoint = var.pscloud_rds_endpoint
-    dbuser = var.pscloud_rds_dbuser
-    dbpass = var.pscloud_rds_dbpass
-  }
-}
-
-resource "local_file" "codeigniter-database-file" {
-  content = data.template_file.rds-codeigniter-database-tpl.rendered
-  filename = "../ansible/files/codeigniter-database.php"
+  filename = "../ansible/group_vars/terraform_vars.yml"
 }

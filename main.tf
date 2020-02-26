@@ -12,5 +12,5 @@ data  "template_file" "ansible-tpl" {
 
 resource "local_file" "ansible-file-yml" {
   content  = data.template_file.ansible-tpl.rendered
-  filename = "../ansible/group_vars/terraform_vars.yml"
+  filename = "../ansible/group_vars/terraform_vars_${var.pscloud_project}}.yml"
 }
